@@ -3,442 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AhTao. Premium - Pop Art Store</title>
+    <title>Ahtao muSpace - App Premium Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- นำเข้าฟอนต์: Kanit (อ่านง่าย) และ Mali (น่ารัก/ลายมือ) -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Mali:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Kanit', 'sans-serif'],
-                        cute: ['Mali', 'cursive'],
+                        sans: ['Mitr', 'sans-serif'],
+                        heading: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        lavender: {
+                            50: '#F9F8FC',
+                            100: '#F1EEF9',
+                            200: '#E4DCF3',
+                            300: '#CDBFE6',
+                            400: '#A792D4',
+                            500: '#8A6FC2',
+                        },
+                        skyblue: {
+                            50: '#F4F8FD',
+                            100: '#E6EFFB',
+                            200: '#C7DCF7',
+                            500: '#639FE6',
+                        }
                     },
                     boxShadow: {
-                        /* เงาแข็งๆ แบบ Neo-Brutalism (สีดำทึบ ไม่อมเบลอ) */
-                        'hard': '4px 4px 0px 0px rgba(15, 23, 42, 1)',
-                        'hard-hover': '2px 2px 0px 0px rgba(15, 23, 42, 1)',
-                        'hard-pink': '4px 4px 0px 0px rgba(244, 114, 182, 1)',
+                        'soft-pastel': '0 8px 30px rgba(138, 111, 194, 0.08)',
+                        'glow-pastel': '0 0 20px rgba(199, 220, 247, 0.5)',
                     },
                     animation: {
-                        'float-1': 'float 3s ease-in-out infinite',
-                        'float-2': 'float 4s ease-in-out infinite reverse',
-                        'float-3': 'float 3.5s ease-in-out infinite',
-                        'wiggle-fast': 'wiggle 1s ease-in-out infinite',
-                        'spin-slow': 'spin 8s linear infinite',
-                        'marquee': 'marquee 12s linear infinite',
+                        blob: "blob 8s infinite",
+                        float: "float 4s ease-in-out infinite",
+                        marquee: "marquee 20s linear infinite",
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(25px, -35px) scale(1.08)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.92)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
                         },
-                        wiggle: {
-                            '0%, 100%': { transform: 'rotate(-5deg)' },
-                            '50%': { transform: 'rotate(5deg)' },
+                        float: {
+                            "0%, 100%": { transform: "translateY(0)" },
+                            "50%": { transform: "translateY(-6px)" },
                         },
                         marquee: {
-                            '0%': { transform: 'translateX(100%)' },
-                            '100%': { transform: 'translateX(-100%)' }
+                            "0%": { transform: "translateX(100%)" },
+                            "100%": { transform: "translateX(-100%)" }
                         }
                     }
                 }
             }
         }
     </script>
-
     <style>
         body {
-            background-color: #fdf4ff; /* พื้นหลังสีชมพูอ่อนมาก */
-            /* ลายตารางแบบกระดาษสมุดกริด (Mesh Grid) */
-            background-image: 
-                linear-gradient(#fbcfe8 1px, transparent 1px),
-                linear-gradient(90deg, #fbcfe8 1px, transparent 1px);
-            background-size: 30px 30px;
-            overflow-x: hidden;
+            background-color: #F7F6FC;
+            background-image: radial-gradient(#E4DCF3 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            color: #3B3445;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        /* -------------------------------------------
-           ✨ เทคนิคที่ 1: Typography Art (ชื่อร้านมีมิติ) 
-           ------------------------------------------- */
-        .title-3d {
-            font-family: 'Kanit', sans-serif;
-            font-weight: 900;
-            color: #fb923c; /* สีส้ม */
-            /* ขอบสีขาวหนา + ขอบสีดำ + เงาซ้อนชั้นทึบๆ */
-            text-shadow: 
-                -2px -2px 0 #fff,  2px -2px 0 #fff,
-                -2px  2px 0 #fff,  2px  2px 0 #fff,
-                -3px -3px 0 #1e293b, 3px -3px 0 #1e293b,
-                -3px  3px 0 #1e293b, 3px  3px 0 #1e293b,
-                5px 5px 0px #1e293b, /* เงาแข็งสีดำชั้นที่ 1 */
-                8px 8px 0px #f472b6; /* เงาแข็งสีชมพูชั้นที่ 2 */
-            letter-spacing: 2px;
-        }
-
-        /* เอฟเฟกต์ตัวหนังสือกระโดด (Jumping Letters) */
-        .jump-text span {
-            display: inline-block;
-            animation: jump 1.5s ease-in-out infinite;
-        }
-        .jump-text span:nth-child(2) { animation-delay: 0.1s; }
-        .jump-text span:nth-child(3) { animation-delay: 0.2s; }
-        .jump-text span:nth-child(4) { animation-delay: 0.3s; }
-        .jump-text span:nth-child(5) { animation-delay: 0.4s; }
-        .jump-text span:nth-child(6) { animation-delay: 0.5s; }
-        .jump-text span:nth-child(7) { animation-delay: 0.6s; }
-        .jump-text span:nth-child(8) { animation-delay: 0.7s; }
-        .jump-text span:nth-child(9) { animation-delay: 0.8s; }
-        .jump-text span:nth-child(10){ animation-delay: 0.9s; }
-        .jump-text span:nth-child(11){ animation-delay: 1.0s; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
         
-        @keyframes jump {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(228, 220, 243, 0.6);
         }
 
-        /* -------------------------------------------
-           ✨ เทคนิคที่ 2: Accordion แบบสมูท 
-           ------------------------------------------- */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .accordion-content.open {
-            opacity: 1;
-        }
-
-        /* เอฟเฟกต์ตอนกดปุ่ม (นุ่มลงเหมือนกดปุ่มยาง) */
-        .neo-btn {
-            transition: all 0.1s;
-        }
-        .neo-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px rgba(15, 23, 42, 1);
-        }
-
-        /* ซ่อน Scrollbar ของป้ายวิ่ง */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="antialiased font-sans flex justify-center selection:bg-lavender-200 selection:text-lavender-800">
 
-    <!-- 🌟 เทคนิคที่ 3: แถบข้อความวิ่ง (Marquee) สีจี๊ดๆ 🌟 -->
-    <div class="bg-black text-white font-cute font-bold py-2 border-b-4 border-black overflow-hidden relative z-50">
-        <div class="whitespace-nowrap inline-block animate-marquee text-[15px]">
-            ⚡️ AhTao. Premium เปิดให้บริการแล้ว! ⚡️ รับประกันจอไม่หลุด 100% ⚡️ สั่งซื้อง่ายผ่านไลน์ ⚡️ ราคาเริ่มต้นแค่ 12 บาท! ⚡️ 
-        </div>
-    </div>
-
-    <!-- 🌟 เทคนิคที่ 4: ของตกแต่งเบลอๆ พื้นหลังลึกตื้น 🌟 -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <!-- เบลอมาก (อยู่ไกล) -->
-        <div class="absolute top-20 left-4 text-7xl opacity-30 filter blur-[4px] animate-float-1">🌸</div>
-        <div class="absolute bottom-40 right-10 text-8xl opacity-20 filter blur-[8px] animate-float-2">🍿</div>
-        <!-- ชัดเจน (อยู่ใกล้) -->
-        <div class="absolute top-1/3 right-4 text-4xl animate-spin-slow">✨</div>
-        <div class="absolute bottom-20 left-10 text-5xl animate-float-3 transform -rotate-12">🍭</div>
-    </div>
-
-    <main class="relative z-10 w-full max-w-[420px] mx-auto min-h-screen pb-20 pt-8 px-5">
-
-        <!-- 🌟 Header: ชื่อร้านสุดอลังการ 🌟 -->
-        <header class="text-center mb-10 relative">
-            
-            <!-- ป้ายเหลืองๆ แปะเอียงๆ (Asymmetry) -->
-            <div class="absolute -top-4 -right-2 bg-yellow-300 border-2 border-black font-cute font-bold text-xs px-3 py-1 transform rotate-12 shadow-hard z-20">
-                ราคาถูกที่สุด! 💸
-            </div>
-
-            <!-- ชื่อร้าน ตัวอักษรกระโดด -->
-            <h1 class="title-3d text-5xl mb-4 jump-text leading-tight mt-6">
-                <span>A</span><span>T</span><span>.</span>
-                <br>
-                <span>P</span><span>r</span><span>e</span><span>m</span><span>i</span><span>u</span><span>m</span>
-            </h1>
-
-            <div class="inline-block bg-white border-[3px] border-black px-5 py-2 shadow-hard transform -rotate-2">
-                <span class="font-cute font-bold text-lg text-pink-500">App Premium Store 🧸</span>
-            </div>
-            
-            <!-- ปุ่ม LINE สไตล์ Neo-Brutalism -->
-            <a href="https://line.me/ti/p/~@716qwqvc" target="_blank" class="neo-btn mt-8 flex items-center justify-center gap-2 bg-[#00c300] text-white px-6 py-4 font-bold text-[16px] border-4 border-black shadow-hard rounded-2xl relative overflow-hidden group">
-                <!-- แสงสะท้อนวิ่งผ่านปุ่ม -->
-                <div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-white opacity-20 group-hover:animate-[shimmer_1s_infinite]"></div>
-                <i class="fa-brands fa-line text-3xl animate-wiggle-fast"></i> 
-                สั่งซื้อที่ไลน์: @716qwqvc
-            </a>
-        </header>
-
-        <!-- 🌟 หมวดหมู่แอป: จัดวางแบบเอียงๆ ไม่สมมาตร 🌟 -->
-        <section class="space-y-6">
-            
-            <!-- 1. Netflix (หมุนเอียงซ้าย 1 องศา) -->
-            <div class="transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative z-20">
-                <button onclick="toggleAccordion('netflix')" class="w-full flex justify-between items-center bg-[#ffe4e6] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-red-600 border-2 border-black rounded-full flex justify-center items-center text-white font-black text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">N</div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">Netflix</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-netflix" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-netflix" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-8 space-y-4">
-                        <!-- ดูทีวีไม่ได้ -->
-                        <div class="border-2 border-dashed border-red-300 p-3 rounded-xl relative">
-                            <div class="absolute -top-3 left-4 bg-red-100 border-2 border-red-400 font-cute font-bold text-xs px-2 py-0.5 text-red-600 transform -rotate-3">📺 ดูทีวีไม่ได้</div>
-                            <div class="space-y-2 mt-2">
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-red-50 neo-btn">
-                                    <span class="font-bold">1 วัน</span>
-                                    <span class="font-black text-lg text-red-600">12 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-red-50 neo-btn">
-                                    <span class="font-bold">7 วัน</span>
-                                    <span class="font-black text-lg text-red-600">32 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-red-100 border-2 border-black p-2.5 rounded-lg hover:bg-red-200 neo-btn">
-                                    <span class="font-bold">30 วัน</span>
-                                    <span class="font-black text-xl text-red-600">99 ฿</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- ดูทีวีได้ -->
-                        <div class="border-2 border-dashed border-red-300 p-3 rounded-xl relative mt-5">
-                            <div class="absolute -top-3 left-4 bg-red-100 border-2 border-red-400 font-cute font-bold text-xs px-2 py-0.5 text-red-600 transform rotate-2">📺 ดูทีวีได้</div>
-                            <div class="space-y-2 mt-2">
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-red-50 neo-btn">
-                                    <span class="font-bold">7 วัน</span>
-                                    <span class="font-black text-lg text-red-600">60 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-red-100 border-2 border-black p-2.5 rounded-lg hover:bg-red-200 neo-btn">
-                                    <span class="font-bold">30 วัน</span>
-                                    <span class="font-black text-xl text-red-600">190 ฿</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. YouTube (หมุนเอียงขวา 1.5 องศา) -->
-            <div class="transform rotate-[1.5deg] hover:rotate-0 transition-transform duration-300 relative z-10">
-                <button onclick="toggleAccordion('youtube')" class="w-full flex justify-between items-center bg-[#fee2e2] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-white border-2 border-black rounded-full flex justify-center items-center text-red-500 text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"><i class="fa-brands fa-youtube"></i></div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">YouTube</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-youtube" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-youtube" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-8 space-y-4">
-                        <div class="border-2 border-dashed border-rose-300 p-3 rounded-xl relative">
-                            <div class="absolute -top-3 left-4 bg-rose-100 border-2 border-rose-400 font-cute font-bold text-xs px-2 py-0.5 text-rose-600 transform -rotate-2">📧 แบบต่อเมล</div>
-                            <div class="space-y-2 mt-2">
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-rose-50 neo-btn">
-                                    <span class="font-bold">30 วัน</span>
-                                    <span class="font-black text-lg text-rose-600">70 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-rose-50 neo-btn">
-                                    <span class="font-bold">60 วัน</span>
-                                    <span class="font-black text-lg text-rose-600">135 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-rose-50 neo-btn">
-                                    <span class="font-bold">90 วัน</span>
-                                    <span class="font-black text-lg text-rose-600">200 ฿</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="border-2 border-dashed border-rose-300 p-3 rounded-xl relative mt-5">
-                            <div class="absolute -top-3 left-4 bg-rose-100 border-2 border-rose-400 font-cute font-bold text-xs px-2 py-0.5 text-rose-600 transform rotate-1">📩 แบบไม่ต่อเมล</div>
-                            <div class="space-y-2 mt-2">
-                                <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-rose-50 neo-btn">
-                                    <div class="leading-tight">
-                                        <span class="font-bold">30 วัน</span><br>
-                                        <span class="text-[11px] font-cute text-rose-500">#เมลลูกค้า</span>
-                                    </div>
-                                    <span class="font-black text-lg text-rose-600">15 ฿</span>
-                                </a>
-                                <a href="#" class="flex justify-between items-center bg-rose-100 border-2 border-black p-2.5 rounded-lg hover:bg-rose-200 neo-btn">
-                                    <div class="leading-tight">
-                                        <span class="font-bold">30 วัน</span><br>
-                                        <span class="text-[11px] font-cute text-rose-500">#เมลร้าน</span>
-                                    </div>
-                                    <span class="font-black text-xl text-rose-600">25 ฿</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Disney+ (สีฟ้าแจ่มๆ) -->
-            <div class="transform -rotate-[1deg] hover:rotate-0 transition-transform duration-300">
-                <button onclick="toggleAccordion('disney')" class="w-full flex justify-between items-center bg-[#dbeafe] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-[#2563eb] border-2 border-black rounded-full flex justify-center items-center text-white font-black text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"><i class="fa-solid fa-plus"></i></div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">Disney+</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-disney" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-disney" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-6 space-y-3">
-                        <a href="#" class="flex justify-between items-center bg-[#eff6ff] border-2 border-black p-3 rounded-xl hover:bg-blue-100 neo-btn">
-                            <div>
-                                <span class="font-bold text-[15px]">30 วัน</span> 
-                                <span class="bg-blue-200 border border-black px-2 py-0.5 rounded font-cute text-[10px] ml-1">แอดหาร</span>
-                                <p class="text-[11px] text-gray-500 mt-1">*เข้าทีวี +10 ฿</p>
-                            </div>
-                            <span class="font-black text-xl text-blue-600">89 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-[#dbeafe] border-2 border-black p-3 rounded-xl hover:bg-blue-200 neo-btn">
-                            <div>
-                                <span class="font-bold text-[15px]">30 วัน</span> 
-                                <span class="bg-blue-300 border border-black px-2 py-0.5 rounded font-cute text-[10px] ml-1">แอดส่วนตัว</span>
-                                <p class="text-[11px] text-gray-500 mt-1">เข้าทีวี 1 / มือถือ 3</p>
-                            </div>
-                            <span class="font-black text-xl text-blue-600">199 ฿</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. VIU (สีเหลืองสด) -->
-            <div class="transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                <button onclick="toggleAccordion('viu')" class="w-full flex justify-between items-center bg-[#fef08a] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-white border-2 border-black rounded-full flex justify-center items-center text-yellow-500 font-black text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">VIU</div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">VIU Premium</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-viu" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-viu" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-6 space-y-2">
-                        <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-yellow-50 neo-btn">
-                            <span class="font-bold">30 วัน</span>
-                            <span class="font-black text-lg text-yellow-600">16 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-yellow-50 neo-btn">
-                            <span class="font-bold">60 วัน</span>
-                            <span class="font-black text-lg text-yellow-600">25 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-yellow-100 border-2 border-black p-2.5 rounded-lg hover:bg-yellow-200 neo-btn">
-                            <span class="font-bold">90 วัน</span>
-                            <span class="font-black text-xl text-yellow-600">35 ฿</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. WeTV (สีฟ้าอ่อน) -->
-            <div class="transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                <button onclick="toggleAccordion('wetv')" class="w-full flex justify-between items-center bg-[#cffafe] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-[#06b6d4] border-2 border-black rounded-full flex justify-center items-center text-white text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"><i class="fa-solid fa-tv"></i></div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">WeTV</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-wetv" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-wetv" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-6 space-y-2">
-                        <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-cyan-50 neo-btn">
-                            <span class="font-bold">30 วัน</span>
-                            <span class="font-black text-lg text-cyan-600">25 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-cyan-50 neo-btn">
-                            <span class="font-bold">90 วัน <span class="font-cute text-[10px] text-cyan-500">#จอหาร</span></span>
-                            <span class="font-black text-lg text-cyan-600">55 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-cyan-100 border-2 border-black p-2.5 rounded-lg hover:bg-cyan-200 neo-btn">
-                            <span class="font-bold">30 วัน <span class="font-cute text-[10px] text-cyan-600">#จอส่วนตัว</span></span>
-                            <span class="font-black text-xl text-cyan-600">100 ฿</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. iQIYI (สีเขียว) -->
-            <div class="transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                <button onclick="toggleAccordion('iqiyi')" class="w-full flex justify-between items-center bg-[#dcfce7] p-4 border-[3px] border-black shadow-hard rounded-2xl neo-btn">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-[#10b981] border-2 border-black rounded-full flex justify-center items-center text-white text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"><i class="fa-solid fa-film"></i></div>
-                        <span class="font-black text-xl text-black uppercase tracking-wider">iQIYI</span>
-                    </div>
-                    <div class="bg-white border-2 border-black w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <i id="icon-iqiyi" class="fa-solid fa-chevron-down text-black"></i>
-                    </div>
-                </button>
-                
-                <div id="content-iqiyi" class="accordion-content">
-                    <div class="bg-white border-[3px] border-black border-t-0 rounded-b-2xl p-4 shadow-hard -mt-4 pt-6 space-y-2">
-                        <a href="#" class="flex justify-between items-center bg-gray-50 border-2 border-black p-2.5 rounded-lg hover:bg-emerald-50 neo-btn">
-                            <span class="font-bold">30 วัน <span class="font-cute text-[10px] text-emerald-500">#จอหาร</span></span>
-                            <span class="font-black text-lg text-emerald-600">25 ฿</span>
-                        </a>
-                        <a href="#" class="flex justify-between items-center bg-emerald-100 border-2 border-black p-2.5 rounded-lg hover:bg-emerald-200 neo-btn">
-                            <span class="font-bold">30 วัน <span class="font-cute text-[10px] text-emerald-600">#จอส่วนตัว</span></span>
-                            <span class="font-black text-xl text-emerald-600">100 ฿</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </section>
+    <!-- Main Container -->
+    <main class="w-full max-w-[480px] min-h-screen relative pb-16 bg-white shadow-2xl sm:my-8 sm:rounded-[40px] overflow-hidden border border-lavender-100">
         
-        <footer class="mt-12 text-center pb-4">
-            <p class="font-cute font-bold text-gray-400">© 2026 AT. Premium 💖</p>
-        </footer>
+        <!-- กระดาษโน้ตวิ่ง (Marquee) โทนม่วงฟ้าละมุน -->
+        <div class="bg-lavender-100/80 py-2 border-b border-lavender-200/60 overflow-hidden relative z-20 backdrop-blur-sm">
+            <div class="whitespace-nowrap inline-block animate-marquee text-[13px] text-lavender-500 font-medium">
+                ☁️ ยินดีต้อนรับสู่ Ahtao muSpace ☁️ • 🪩 แอปพรีเมียมราคาเบาๆ • 🛋️ สั่งซื้อง่ายผ่านไลน์ร้าน • ✨ ส่งไว ไว้ใจได้ค่ะ 🌙
+            </div>
+        </div>
 
+        <!-- Ambient Background Blobs (ม่วง-ฟ้าพาสเทล) -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div class="absolute top-[5%] left-[-10%] w-[280px] h-[280px] bg-lavender-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 animate-blob"></div>
+            <div class="absolute top-[35%] right-[-10%] w-[320px] h-[320px] bg-skyblue-200 rounded-full mix-blend-multiply filter blur-[90px] opacity-50 animate-blob" style="animation-delay: 2.5s;"></div>
+            <div class="absolute bottom-[10%] left-[10%] w-[260px] h-[260px] bg-purple-100 rounded-full mix-blend-multiply filter blur-[70px] opacity-50 animate-blob" style="animation-delay: 5s;"></div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="relative z-10 px-5 pt-8">
+            
+            <!-- Header Section -->
+            <header class="text-center relative mb-8">
+                <!-- ของตกแต่งลอยเบาๆ -->
+                <div class="absolute top-0 left-2 text-2xl animate-float">🪐</div>
+                <div class="absolute top-2 right-2 text-2xl animate-float" style="animation-delay: 1.5s;">💫</div>
+
+                <h1 class="font-heading text-3xl sm:text-4xl font-bold text-lavender-500 mb-1 tracking-wide drop-shadow-sm">
+                    Ahtao muSpace
+                </h1>
+                <p class="text-xs text-lavender-400 font-medium mb-4 tracking-wider uppercase">App Premium Store</p>
+                
+                <!-- ปุ่ม LINE แบบมินิมอล (เล็กกำลังดี ไม่แย่งซีน) -->
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/p/~@716qwqvc" target="_blank" class="inline-flex items-center gap-2 bg-lavender-50 hover:bg-lavender-100 text-lavender-500 border border-lavender-300 px-4 py-2 rounded-full font-medium transition-all active:scale-95 text-[13px] shadow-sm">
+                        <i class="fa-brands fa-line text-emerald-500 text-base"></i> 
+                        <span>@716qwqvc</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- App List Section (Accordion) -->
+            <section class="space-y-3.5">
+                
+                <!-- 1. Netflix -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('netflix')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-50 rounded-xl flex justify-center items-center flex-shrink-0 text-red-500 font-heading font-bold text-lg shadow-sm">N</div>
+                            <span class="font-semibold text-base text-gray-800">Netflix</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-netflix" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-netflix" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-3">
+                            <!-- ดูทีวีไม่ได้ -->
+                            <div class="bg-lavender-50/40 p-2.5 rounded-2xl border border-lavender-100/50">
+                                <div class="text-[12px] font-medium text-lavender-400 mb-2 pl-1 flex items-center gap-1.5"><i class="fa-solid fa-mobile-screen-button text-[10px]"></i> ดูทีวีไม่ได้</div>
+                                <div class="space-y-1.5">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%201%20วัน%2012%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">1 วัน</span>
+                                        <span class="font-bold text-red-500">12.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%207%20วัน%2032%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">7 วัน</span>
+                                        <span class="font-bold text-red-500">32.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%2030%20วัน%2099%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700 font-medium">30 วัน</span>
+                                        <span class="font-bold text-red-500 text-base">99.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ดูทีวีได้ -->
+                            <div class="bg-lavender-50/40 p-2.5 rounded-2xl border border-lavender-100/50">
+                                <div class="text-[12px] font-medium text-lavender-400 mb-2 pl-1 flex items-center gap-1.5"><i class="fa-solid fa-tv text-[10px]"></i> ดูทีวีได้</div>
+                                <div class="space-y-1.5">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%207%20วัน%2060%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">7 วัน</span>
+                                        <span class="font-bold text-red-500">60.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%2030%20วัน%20190%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700 font-medium">30 วัน</span>
+                                        <span class="font-bold text-red-500 text-base">190.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. YouTube Premium -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('youtube')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-rose-50 rounded-xl flex justify-center items-center flex-shrink-0 text-rose-500 shadow-sm">
+                                <i class="fa-brands fa-youtube text-base"></i>
+                            </div>
+                            <span class="font-semibold text-base text-gray-800">YouTube Premium</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-youtube" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-youtube" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-3">
+                            <!-- แบบต่อเมล -->
+                            <div class="bg-lavender-50/40 p-2.5 rounded-2xl border border-lavender-100/50">
+                                <div class="text-[12px] font-medium text-lavender-400 mb-2 pl-1 flex items-center gap-1.5"><i class="fa-regular fa-envelope text-[10px]"></i> แบบต่อเมล</div>
+                                <div class="space-y-1.5">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2030%20วัน%2070%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">30 วัน</span>
+                                        <span class="font-bold text-rose-500">70.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2060%20วัน%20135%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">60 วัน</span>
+                                        <span class="font-bold text-rose-500">135.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2090%20วัน%20200%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <span class="text-gray-700">90 วัน</span>
+                                        <span class="font-bold text-rose-500">200.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- แบบไม่ต่อเมล -->
+                            <div class="bg-lavender-50/40 p-2.5 rounded-2xl border border-lavender-100/50">
+                                <div class="text-[12px] font-medium text-lavender-400 mb-2 pl-1 flex items-center gap-1.5"><i class="fa-solid fa-envelope-open text-[10px]"></i> แบบไม่ต่อเมล</div>
+                                <div class="space-y-1.5">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2015%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <div>
+                                            <span class="text-gray-700">30 วัน</span>
+                                            <span class="text-[10px] text-gray-400 ml-1">(เมลลูกค้า)</span>
+                                        </div>
+                                        <span class="font-bold text-rose-500">15.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                        <div>
+                                            <span class="text-gray-700 font-medium">30 วัน</span>
+                                            <span class="text-[10px] text-rose-500 ml-1 font-medium">(เมลร้าน)</span>
+                                        </div>
+                                        <span class="font-bold text-rose-500">25.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Disney+ Premium -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('disney')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-skyblue-50 rounded-xl flex justify-center items-center flex-shrink-0 text-skyblue-500 shadow-sm">
+                                <i class="fa-solid fa-plus text-base"></i>
+                            </div>
+                            <span class="font-semibold text-base text-gray-800">Disney+ Premium</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-disney" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-disney" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-2">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดหาร%20จอไม่ชน)%2089%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <div>
+                                    <div class="text-gray-700 font-medium">30 วัน (แอดหาร จอไม่ชน)</div>
+                                    <div class="text-[11px] text-gray-400 mt-0.5">*เข้าทีวี +10 บาท</div>
+                                </div>
+                                <span class="font-bold text-skyblue-500 text-base">89.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดส่วนตัว)%20199%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <div>
+                                    <div class="text-gray-700 font-medium">30 วัน (แอดส่วนตัว)</div>
+                                    <div class="text-[11px] text-gray-400 mt-0.5">เข้าทีวี 1 / มือถือสูงสุด 3</div>
+                                </div>
+                                <span class="font-bold text-skyblue-500 text-base">199.-</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. VIU -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('viu')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-amber-50 rounded-xl flex justify-center items-center flex-shrink-0 text-amber-500 font-heading font-bold text-xs shadow-sm">VIU</div>
+                            <span class="font-semibold text-base text-gray-800">VIU</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-viu" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-viu" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-1.5">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2030%20วัน%2016%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700">30 วัน</span>
+                                <span class="font-bold text-amber-500">16.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2060%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700">60 วัน</span>
+                                <span class="font-bold text-amber-500">25.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2090%20วัน%2035%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700 font-medium">90 วัน</span>
+                                <span class="font-bold text-amber-500 text-base">35.-</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. WeTV -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('wetv')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-cyan-50 rounded-xl flex justify-center items-center flex-shrink-0 text-cyan-500 shadow-sm">
+                                <i class="fa-solid fa-tv text-sm"></i>
+                            </div>
+                            <span class="font-semibold text-base text-gray-800">WeTV</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-wetv" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-wetv" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-1.5">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%2030%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700">30 วัน</span>
+                                <span class="font-bold text-cyan-600">25.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอหาร)%2090%20วัน%2055%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700">90 วัน <span class="text-[11px] text-cyan-500 font-medium">(จอหาร)</span></span>
+                                <span class="font-bold text-cyan-600">55.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700 font-medium">30 วัน <span class="text-[11px] text-cyan-600 font-medium">(จอส่วนตัว)</span></span>
+                                <span class="font-bold text-cyan-600 text-base">100.-</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. iQIYI -->
+                <div class="glass-card rounded-[24px] p-2 shadow-soft transition-all duration-300">
+                    <button onclick="toggleAccordion('iqiyi')" class="w-full flex justify-between items-center bg-white/60 hover:bg-white p-3 rounded-2xl transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-emerald-50 rounded-xl flex justify-center items-center flex-shrink-0 text-emerald-500 shadow-sm">
+                                <i class="fa-solid fa-film text-sm"></i>
+                            </div>
+                            <span class="font-semibold text-base text-gray-800">iQIYI</span>
+                        </div>
+                        <div class="w-7 h-7 bg-lavender-50 rounded-full flex items-center justify-center text-lavender-400 text-xs">
+                            <i id="icon-iqiyi" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    
+                    <div id="content-iqiyi" class="accordion-content px-1">
+                        <div class="pt-3 pb-2 space-y-1.5">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอหาร)%2030%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700">30 วัน <span class="text-[11px] text-emerald-500 font-medium">(จอหาร)</span></span>
+                                <span class="font-bold text-emerald-600">25.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center bg-white p-2.5 rounded-xl hover:bg-lavender-50/50 border border-gray-100 transition-all text-sm">
+                                <span class="text-gray-700 font-medium">30 วัน <span class="text-[11px] text-emerald-600 font-medium">(จอส่วนตัว)</span></span>
+                                <span class="font-bold text-emerald-600 text-base">100.-</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center pt-8 pb-4">
+                <p class="text-xs text-lavender-400 font-medium">
+                    © 2026 Ahtao muSpace. All rights reserved. 💜
+                </p>
+            </footer>
+        </div>
     </main>
 
-    <!-- Script สำหรับเปิด/ปิด Accordion แบบสมูท -->
+    <!-- Script สำหรับควบคุม Accordion และป้องกันการกระตุก -->
     <script>
         function toggleAccordion(id) {
             const content = document.getElementById('content-' + id);
             const icon = document.getElementById('icon-' + id);
             
-            if (content.classList.contains('open')) {
-                // ปิด
+            // ปิดตัวอื่นที่เปิดอยู่ (ถ้าต้องการให้กางทีละอัน)
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                if (item.id !== 'content-' + id && item.style.maxHeight) {
+                    item.style.maxHeight = null;
+                    const otherIcon = document.getElementById('icon-' + item.id.replace('content-', ''));
+                    if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (content.style.maxHeight) {
                 content.style.maxHeight = null;
-                content.classList.remove('open');
                 icon.style.transform = 'rotate(0deg)';
             } else {
-                // เปิด
                 content.style.maxHeight = content.scrollHeight + "px";
-                content.classList.add('open');
                 icon.style.transform = 'rotate(180deg)';
             }
         }
-
-        // เอฟเฟกต์แสงเงาวิ่งผ่านปุ่มตอนโหลด (Optional)
-        // สร้าง stylesheet ย่อยเพื่อแทรก keyframes สำหรับ shimmer
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes shimmer {
-                100% { transform: translateX(250%) skewX(-12deg); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

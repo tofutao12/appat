@@ -5,15 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AT. Premium - App Premium Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ใช้ฟอนต์แบบเดียวกับ Pinkjulieland -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Mitr', 'sans-serif'],
+                        heading: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        theme: {
+                            bg: '#FAFAFC',
+                            card: '#FFFFFF',
+                            textDark: '#332E3A',
+                            textMuted: '#6B6670',
+                            noteBg: '#F3F4F6',
+                            btnBg: '#F6F3F9',
+                            btnHover: '#EBE5F0',
+                            accent: '#FFB6C1',
+                            purpleSoft: '#E8D1EE',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.03)',
+                        'float': '0 10px 30px rgba(0, 0, 0, 0.06)',
+                    },
+                    animation: {
+                        blob: "blob 7s infinite",
+                        float: "float 4s ease-in-out infinite",
+                        floatSlow: "float 6s ease-in-out infinite",
+                        pulseSoft: "pulseSoft 3s ease-in-out infinite",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        },
+                        float: {
+                            "0%, 100%": { transform: "translateY(0)" },
+                            "50%": { transform: "translateY(-8px)" },
+                        },
+                        pulseSoft: {
+                            "0%, 100%": { opacity: 1, transform: "scale(1)" },
+                            "50%": { opacity: 0.7, transform: "scale(0.95)" },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Kanit', sans-serif;
-            background-color: #fff8eb; /* โทนเหลืองครีมอ่อนๆ สไตล์รูปออริจินัล */
-            background-image: radial-gradient(#ffd580 1.5px, transparent 1.5px);
-            background-size: 20px 20px;
+            background-color: #FAFAFC;
+            color: #332E3A;
+            -webkit-tap-highlight-color: transparent;
         }
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        /* แอนิเมชันสำหรับ Blob */
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        /* สไตล์ Glassmorphism แบบใน Pinkjulieland */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
         /* ซ่อนเนื้อหา Accordion ตามค่าเริ่มต้น */
         .accordion-content {
             max-height: 0;
@@ -22,140 +91,264 @@
         }
     </style>
 </head>
-<body class="text-gray-700 min-h-screen flex justify-center py-8 px-4">
+<body class="antialiased font-sans flex justify-center selection:bg-pink-200 selection:text-pink-900">
 
-    <!-- Container หลัก -->
-    <div class="w-full max-w-md bg-white rounded-[2rem] shadow-xl p-6 border-4 border-yellow-200">
+    <!-- Main Container -->
+    <main class="w-full max-w-[480px] min-h-screen relative pb-12 bg-white shadow-2xl sm:my-8 sm:rounded-[40px] overflow-hidden border border-gray-100">
         
-        <!-- Header -->
-        <div class="text-center mb-6">
-            <h1 class="text-3xl font-extrabold text-orange-500 mb-1" style="text-shadow: 2px 2px 0px #fef08a;">AT. Premium</h1>
-            <p class="text-sm font-semibold text-teal-500 bg-teal-50 inline-block px-4 py-1 rounded-full border border-teal-200">App Premium Store 🖍️</p>
+        <!-- === AMBIENT BACKGROUND EFFECTS (Animated Blobs จาก Pinkjulieland) === -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <!-- โทนสี Blob จะปรับให้เข้ากับความพาสเทล -->
+            <div class="absolute top-[-5%] left-[-10%] w-[300px] h-[300px] bg-orange-100 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob"></div>
+            <div class="absolute top-[30%] right-[-10%] w-[350px] h-[350px] bg-yellow-100 rounded-full mix-blend-multiply filter blur-[90px] opacity-60 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-[10%] left-[5%] w-[250px] h-[250px] bg-pink-50 rounded-full mix-blend-multiply filter blur-[70px] opacity-70 animate-blob animation-delay-4000"></div>
+            
+            <!-- Floating Sparkle -->
+            <svg class="absolute top-[15%] right-[10%] w-4 h-4 animate-float opacity-50" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 13 9 18 12C13 14 12 22 12 22C12 22 11 14 6 12C11 9 12 2 12 2Z" fill="#FDB0C0"/></svg>
+            <svg class="absolute top-[45%] left-[8%] w-3 h-3 animate-floatSlow opacity-40 animation-delay-2000" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 13 9 18 12C13 14 12 22 12 22C12 22 11 14 6 12C11 9 12 2 12 2Z" fill="#B19CD9"/></svg>
+            <svg class="absolute bottom-[25%] right-[12%] w-5 h-5 animate-float opacity-40 animation-delay-4000" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 13 9 18 12C13 14 12 22 12 22C12 22 11 14 6 12C11 9 12 2 12 2Z" fill="#AEC6CF"/></svg>
         </div>
 
-        <!-- Contact Button -->
-        <a href="https://line.me/ti/p/~@716qwqvc" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#06C755] text-white py-3 rounded-xl font-bold mb-6 hover:bg-green-600 active:scale-95 transition-transform shadow-sm">
-            <i class="fa-brands fa-line text-xl"></i> สั่งซื้อ / สอบถาม : @716qwqvc
-        </a>
+        <!-- === CONTENT (z-10) === -->
+        <div class="relative z-10">
+            <!-- Header Section -->
+            <header class="pt-14 pb-6 px-6 text-center relative">
+                <h1 class="font-heading text-4xl font-bold text-theme-textDark mb-1 tracking-wide relative inline-block">
+                    AT. Premium
+                    <svg class="absolute -top-3 -right-5 w-6 h-6 animate-pulseSoft" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 13 9 18 12C13 14 12 22 12 22C12 22 11 14 6 12C11 9 12 2 12 2Z" fill="#FDB0C0"/></svg>
+                </h1>
+                <h2 class="font-heading text-xl text-theme-textMuted font-medium mb-4">App Premium Store</h2>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/p/~@716qwqvc" target="_blank" class="inline-flex items-center gap-2 bg-[#06C755] text-white px-6 py-2.5 rounded-full font-medium shadow-md hover:bg-green-600 active:scale-95 transition-transform text-[15px]">
+                        <i class="fa-brands fa-line text-xl"></i> สั่งซื้อติดต่อ : @716qwqvc
+                    </a>
+                </div>
+            </header>
 
-        <!-- 🌟 หมวดหมู่แอปสตรีมมิ่ง 🌟 -->
-        <div class="space-y-4">
-
-            <!-- 1. Netflix -->
-            <div class="border-2 border-red-200 rounded-2xl overflow-hidden bg-red-50">
-                <button onclick="toggleAccordion('netflix')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-red-50 transition-colors">
-                    <span class="font-bold text-red-600 text-lg"><i class="fa-solid fa-n text-xl mr-2"></i>Netflix</span>
-                    <i id="icon-netflix" class="fa-solid fa-chevron-down text-red-400 transition-transform"></i>
-                </button>
-                <div id="content-netflix" class="accordion-content bg-red-50 px-4">
-                    <div class="py-3 space-y-3">
-                        <div>
-                            <p class="text-xs font-bold text-red-500 mb-1 border-b border-red-200 pb-1">📺 ดูทีวีไม่ได้</p>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%201%20วัน%2012%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>1 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">12 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%207%20วัน%2032%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>7 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">32 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%2030%20วัน%2099%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">99 ฿</span></a>
+            <!-- App List Section -->
+            <section class="px-5 mb-8 space-y-4">
+                
+                <!-- 1. Netflix (Glass Card) -->
+                <div class="glass-card p-4 rounded-[28px] shadow-soft border border-white/60 hover:shadow-float transition-shadow duration-300">
+                    <button onclick="toggleAccordion('netflix')" class="w-full flex justify-between items-center bg-white/50 p-2 rounded-2xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-50 rounded-full flex justify-center items-center flex-shrink-0">
+                                <span class="font-bold text-red-500 text-lg font-heading">N</span>
+                            </div>
+                            <span class="font-semibold text-lg text-theme-textDark">Netflix</span>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-red-500 mb-1 border-b border-red-200 pb-1">📺 ดูทีวีได้</p>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%207%20วัน%2060%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>7 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">60 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%2030%20วัน%20190%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">190 ฿</span></a>
+                        <i id="icon-netflix" class="fa-solid fa-chevron-down text-theme-textMuted transition-transform bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"></i>
+                    </button>
+                    
+                    <div id="content-netflix" class="accordion-content">
+                        <div class="pt-4 space-y-4">
+                            <!-- ดูทีวีไม่ได้ -->
+                            <div>
+                                <div class="text-[13px] font-medium text-theme-textMuted flex items-center gap-1.5 mb-2 pl-1"><i class="fa-solid fa-tv text-red-300"></i> ดูทีวีไม่ได้</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%201%20วัน%2012%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-red-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">1 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">12.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%207%20วัน%2032%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-red-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">7 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">32.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีไม่ได้)%2030%20วัน%2099%20บาท" class="flex justify-between items-center bg-red-50 p-3 rounded-xl shadow-sm border border-red-100">
+                                        <span class="text-[14px] font-semibold text-theme-textDark">30 วัน</span>
+                                        <span class="font-bold text-xl text-theme-textDark">99.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ดูทีวีได้ -->
+                            <div>
+                                <div class="text-[13px] font-medium text-theme-textMuted flex items-center gap-1.5 mb-2 pl-1"><i class="fa-solid fa-tv text-red-300"></i> ดูทีวีได้</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%207%20วัน%2060%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-red-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">7 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">60.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Netflix%20(ดูทีวีได้)%2030%20วัน%20190%20บาท" class="flex justify-between items-center bg-red-50 p-3 rounded-xl shadow-sm border border-red-100">
+                                        <span class="text-[14px] font-semibold text-theme-textDark">30 วัน</span>
+                                        <span class="font-bold text-xl text-theme-textDark">190.-</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 2. YouTube -->
-            <div class="border-2 border-rose-200 rounded-2xl overflow-hidden bg-rose-50">
-                <button onclick="toggleAccordion('youtube')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-rose-50 transition-colors">
-                    <span class="font-bold text-rose-600 text-lg"><i class="fa-brands fa-youtube text-xl mr-2"></i>YouTube Premium</span>
-                    <i id="icon-youtube" class="fa-solid fa-chevron-down text-rose-400 transition-transform"></i>
-                </button>
-                <div id="content-youtube" class="accordion-content bg-rose-50 px-4">
-                    <div class="py-3 space-y-3">
-                        <div>
-                            <p class="text-xs font-bold text-rose-500 mb-1 border-b border-rose-200 pb-1">📧 แบบต่อเมล</p>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2030%20วัน%2070%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">70 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2060%20วัน%20135%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>60 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">135 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2090%20วัน%20200%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>90 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">200 ฿</span></a>
+                <!-- 2. YouTube -->
+                <div class="glass-card p-4 rounded-[28px] shadow-soft border border-white/60 hover:shadow-float transition-shadow duration-300">
+                    <button onclick="toggleAccordion('youtube')" class="w-full flex justify-between items-center bg-white/50 p-2 rounded-2xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-rose-50 rounded-full flex justify-center items-center flex-shrink-0">
+                                <i class="fa-brands fa-youtube text-rose-500 text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-lg text-theme-textDark">YouTube Premium</span>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-rose-500 mb-1 border-b border-rose-200 pb-1">📧 แบบไม่ต่อเมล</p>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2015%20บาท%20(เมลลูกค้า)" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน (เมลลูกค้า)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">15 ฿</span></a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2025%20บาท%20(เมลร้าน)" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน (เมลร้าน)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">25 ฿</span></a>
+                        <i id="icon-youtube" class="fa-solid fa-chevron-down text-theme-textMuted transition-transform bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"></i>
+                    </button>
+                    
+                    <div id="content-youtube" class="accordion-content">
+                        <div class="pt-4 space-y-4">
+                            <!-- แบบต่อเมล -->
+                            <div>
+                                <div class="text-[13px] font-medium text-theme-textMuted flex items-center gap-1.5 mb-2 pl-1"><i class="fa-regular fa-envelope text-rose-300"></i> แบบต่อเมล</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2030%20วัน%2070%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-rose-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">30 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">70.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2060%20วัน%20135%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-rose-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">60 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">135.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบต่อเมล)%2090%20วัน%20200%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-rose-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">90 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">200.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- แบบไม่ต่อเมล -->
+                            <div>
+                                <div class="text-[13px] font-medium text-theme-textMuted flex items-center gap-1.5 mb-2 pl-1"><i class="fa-regular fa-envelope-open text-rose-300"></i> แบบไม่ต่อเมล</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2015%20บาท%20(เมลลูกค้า)" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-rose-100 transition-colors">
+                                        <div class="text-[14px]">
+                                            <div class="font-medium text-theme-textDark">30 วัน</div>
+                                            <div class="text-[11px] text-theme-textMuted mt-0.5">#เมลลูกค้า</div>
+                                        </div>
+                                        <span class="font-bold text-lg text-theme-textDark">15.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20YouTube%20(แบบไม่ต่อเมล)%2030%20วัน%2025%20บาท%20(เมลร้าน)" class="flex justify-between items-center bg-rose-50 p-3 rounded-xl shadow-sm border border-rose-100">
+                                        <div class="text-[14px]">
+                                            <div class="font-semibold text-theme-textDark">30 วัน</div>
+                                            <div class="text-[11px] text-rose-500 mt-0.5 font-medium">#เมลร้าน</div>
+                                        </div>
+                                        <span class="font-bold text-xl text-theme-textDark">25.-</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 3. Disney+ -->
-            <div class="border-2 border-blue-200 rounded-2xl overflow-hidden bg-blue-50">
-                <button onclick="toggleAccordion('disney')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-blue-50 transition-colors">
-                    <span class="font-bold text-blue-700 text-lg"><i class="fa-solid fa-plus text-xl mr-2"></i>Disney+ Premium</span>
-                    <i id="icon-disney" class="fa-solid fa-chevron-down text-blue-400 transition-transform"></i>
-                </button>
-                <div id="content-disney" class="accordion-content bg-blue-50 px-4">
-                    <div class="py-3 space-y-3">
-                        <div class="space-y-1">
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดหาร%20จอไม่ชน)%2030%20วัน%2089%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold border-b border-blue-100 pb-2">
-                                <span class="leading-tight">30 วัน (แอดหาร จอไม่ชน)<br><span class="text-xs text-blue-500 font-normal">*เข้าทีวี +10 บาท</span></span>
-                                <span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm shrink-0">89 ฿</span>
+                <!-- 3. Disney+ -->
+                <div class="glass-card p-4 rounded-[28px] shadow-soft border border-white/60 hover:shadow-float transition-shadow duration-300">
+                    <button onclick="toggleAccordion('disney')" class="w-full flex justify-between items-center bg-white/50 p-2 rounded-2xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-50 rounded-full flex justify-center items-center flex-shrink-0">
+                                <i class="fa-solid fa-plus text-blue-500 text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-lg text-theme-textDark">Disney+ Premium</span>
+                        </div>
+                        <i id="icon-disney" class="fa-solid fa-chevron-down text-theme-textMuted transition-transform bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"></i>
+                    </button>
+                    
+                    <div id="content-disney" class="accordion-content">
+                        <div class="pt-4 space-y-2">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดหาร%20จอไม่ชน)%2030%20วัน%2089%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-blue-100 transition-colors">
+                                <div class="text-[14px]">
+                                    <div class="font-medium text-theme-textDark">30 วัน (แอดหาร จอไม่ชน)</div>
+                                    <div class="text-[11px] text-theme-textMuted mt-0.5">*เข้าทีวี +10 บาท</div>
+                                </div>
+                                <span class="font-bold text-lg text-theme-textDark">89.-</span>
                             </a>
-                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดส่วนตัว)%2030%20วัน%20199%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold pt-2">
-                                <span class="leading-tight">30 วัน (แอดส่วนตัว)<br><span class="text-xs text-blue-500 font-normal">*เข้าทีวีได้ 1, มือถือได้สูงสุด 3 เครื่อง</span></span>
-                                <span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm shrink-0">199 ฿</span>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20Disney%20(แอดส่วนตัว)%2030%20วัน%20199%20บาท" class="flex justify-between items-center bg-blue-50 p-3 rounded-xl shadow-sm border border-blue-100">
+                                <div class="text-[14px]">
+                                    <div class="font-semibold text-theme-textDark">30 วัน (แอดส่วนตัว)</div>
+                                    <div class="text-[11px] text-blue-500 mt-0.5 font-medium">เข้าทีวี 1 / มือถือ 3</div>
+                                </div>
+                                <span class="font-bold text-xl text-theme-textDark">199.-</span>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 4. VIU -->
-            <div class="border-2 border-yellow-300 rounded-2xl overflow-hidden bg-yellow-50">
-                <button onclick="toggleAccordion('viu')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-yellow-50 transition-colors">
-                    <span class="font-bold text-yellow-600 text-lg"><i class="fa-solid fa-play text-xl mr-2"></i>VIU</span>
-                    <i id="icon-viu" class="fa-solid fa-chevron-down text-yellow-400 transition-transform"></i>
-                </button>
-                <div id="content-viu" class="accordion-content bg-yellow-50 px-4">
-                    <div class="py-3 space-y-1">
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2030%20วัน%2016%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">16 ฿</span></a>
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2060%20วัน%2025%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>60 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">25 ฿</span></a>
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2090%20วัน%2035%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>90 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">35 ฿</span></a>
+                <!-- 4. VIU -->
+                <div class="glass-card p-4 rounded-[28px] shadow-soft border border-white/60 hover:shadow-float transition-shadow duration-300">
+                    <button onclick="toggleAccordion('viu')" class="w-full flex justify-between items-center bg-white/50 p-2 rounded-2xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-yellow-50 rounded-full flex justify-center items-center flex-shrink-0">
+                                <span class="font-bold text-yellow-500 text-sm font-heading">VIU</span>
+                            </div>
+                            <span class="font-semibold text-lg text-theme-textDark">VIU</span>
+                        </div>
+                        <i id="icon-viu" class="fa-solid fa-chevron-down text-theme-textMuted transition-transform bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"></i>
+                    </button>
+                    
+                    <div id="content-viu" class="accordion-content">
+                        <div class="pt-4 space-y-2">
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2030%20วัน%2016%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-yellow-100 transition-colors">
+                                <span class="text-[14px] font-medium text-theme-textDark">30 วัน</span>
+                                <span class="font-bold text-lg text-theme-textDark">16.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2060%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-yellow-100 transition-colors">
+                                <span class="text-[14px] font-medium text-theme-textDark">60 วัน</span>
+                                <span class="font-bold text-lg text-theme-textDark">25.-</span>
+                            </a>
+                            <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20VIU%2090%20วัน%2035%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-yellow-100 transition-colors">
+                                <span class="text-[14px] font-medium text-theme-textDark">90 วัน</span>
+                                <span class="font-bold text-lg text-theme-textDark">35.-</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 5. WeTV -->
-            <div class="border-2 border-cyan-300 rounded-2xl overflow-hidden bg-cyan-50">
-                <button onclick="toggleAccordion('wetv')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-cyan-50 transition-colors">
-                    <span class="font-bold text-cyan-700 text-lg"><i class="fa-solid fa-tv text-xl mr-2"></i>WeTV</span>
-                    <i id="icon-wetv" class="fa-solid fa-chevron-down text-cyan-400 transition-transform"></i>
-                </button>
-                <div id="content-wetv" class="accordion-content bg-cyan-50 px-4">
-                    <div class="py-3 space-y-1">
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%2030%20วัน%2025%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">25 ฿</span></a>
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอหาร)%2090%20วัน%2055%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>90 วัน (จอหาร)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">55 ฿</span></a>
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน (จอส่วนตัว)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">100 ฿</span></a>
+                <!-- 5. WeTV & iQIYI (Grouped) -->
+                <div class="glass-card p-4 rounded-[28px] shadow-soft border border-white/60 hover:shadow-float transition-shadow duration-300">
+                    <button onclick="toggleAccordion('asian')" class="w-full flex justify-between items-center bg-white/50 p-2 rounded-2xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-teal-50 rounded-full flex justify-center items-center flex-shrink-0">
+                                <i class="fa-solid fa-tv text-teal-500"></i>
+                            </div>
+                            <span class="font-semibold text-lg text-theme-textDark">WeTV & iQIYI</span>
+                        </div>
+                        <i id="icon-asian" class="fa-solid fa-chevron-down text-theme-textMuted transition-transform bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"></i>
+                    </button>
+                    
+                    <div id="content-asian" class="accordion-content">
+                        <div class="pt-4 space-y-4">
+                            <!-- WeTV -->
+                            <div>
+                                <div class="text-[13px] font-bold text-cyan-600 mb-2 pl-1 bg-cyan-50 inline-block px-3 py-1 rounded-full">WeTV</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%2030%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-cyan-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">30 วัน</span>
+                                        <span class="font-bold text-lg text-theme-textDark">25.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอหาร)%2090%20วัน%2055%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-cyan-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">90 วัน (จอหาร)</span>
+                                        <span class="font-bold text-lg text-theme-textDark">55.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20WeTV%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center bg-cyan-50 p-3 rounded-xl shadow-sm border border-cyan-100">
+                                        <span class="text-[14px] font-semibold text-theme-textDark">30 วัน (จอส่วนตัว)</span>
+                                        <span class="font-bold text-xl text-theme-textDark">100.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- iQIYI -->
+                            <div>
+                                <div class="text-[13px] font-bold text-emerald-600 mb-2 pl-1 bg-emerald-50 inline-block px-3 py-1 rounded-full">iQIYI</div>
+                                <div class="space-y-2">
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอหาร)%2030%20วัน%2025%20บาท" class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-gray-50 hover:border-emerald-100 transition-colors">
+                                        <span class="text-[14px] font-medium text-theme-textDark">30 วัน (จอหาร)</span>
+                                        <span class="font-bold text-lg text-theme-textDark">25.-</span>
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center bg-emerald-50 p-3 rounded-xl shadow-sm border border-emerald-100">
+                                        <span class="text-[14px] font-semibold text-theme-textDark">30 วัน (จอส่วนตัว)</span>
+                                        <span class="font-bold text-xl text-theme-textDark">100.-</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 6. iQIYI -->
-            <div class="border-2 border-emerald-300 rounded-2xl overflow-hidden bg-emerald-50">
-                <button onclick="toggleAccordion('iqiyi')" class="w-full flex justify-between items-center p-4 bg-white hover:bg-emerald-50 transition-colors">
-                    <span class="font-bold text-emerald-700 text-lg"><i class="fa-solid fa-film text-xl mr-2"></i>iQIYI</span>
-                    <i id="icon-iqiyi" class="fa-solid fa-chevron-down text-emerald-400 transition-transform"></i>
-                </button>
-                <div id="content-iqiyi" class="accordion-content bg-emerald-50 px-4">
-                    <div class="py-3 space-y-1">
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอหาร)%2030%20วัน%2025%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน (จอหาร)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">25 ฿</span></a>
-                        <a href="https://line.me/ti/p/~@716qwqvc?text=สนใจ%20iQIYI%20(จอส่วนตัว)%2030%20วัน%20100%20บาท" class="flex justify-between items-center py-1.5 text-sm hover:font-bold"><span>30 วัน (จอส่วนตัว)</span><span class="font-semibold bg-white px-2 py-0.5 rounded shadow-sm">100 ฿</span></a>
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- End App List -->
-
-    </div>
+            </section>
+        </div>
+    </main>
 
     <!-- Script สำหรับเปิด/ปิดแถบเมนูแอป (Accordion) -->
     <script>
@@ -168,7 +361,7 @@
                 content.style.maxHeight = null;
                 icon.style.transform = 'rotate(0deg)';
             } else {
-                // เปิด (ให้ความสูงมากพอที่จะแสดงเนื้อหาทั้งหมด)
+                // เปิด
                 content.style.maxHeight = content.scrollHeight + "px";
                 icon.style.transform = 'rotate(180deg)';
             }
